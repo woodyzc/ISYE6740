@@ -8,8 +8,9 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+& \text{a}
 \begin{align}
-& \textit{Since the distortion function:}\\
+& \text{Since the distortion function:}\\
 &J= \sum_{n=1}^N \sum_{k=1}^K r_{nk} || x_n - \mu_k||^2\\
 & \text{ and the dissimilarity function: }\\
 & || x_n - \mu_k||^2\\
