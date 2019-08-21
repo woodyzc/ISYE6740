@@ -1,0 +1,28 @@
+---
+title: "Homework1"
+author: "Chong Zhang"
+date: "August 21, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+\begin{align}
+& \textit{Since the distortion function:}\\
+&J= \sum_{n=1}^N \sum_{k=1}^K r_{nk} || x_n - \mu_k||^2\\
+& \text{ and the dissimilarity function: }\\
+& || x_n - \mu_k||^2\\
+
+& \text{if we want to find the values for} \{r_{nk}\} \text{and} \{{\mu_k}\} \text{to minimize J. We can perform a iteration of two steps: first,minimize J with}\\
+& \text{respect to the} \{r_{nk}\}, \text{keeping the} \{{\mu_k}\} \text{fixed. Second
+,minimize J with respect to the} \{{\mu_k}\}, \text{keeping} \{r_{nk}\} \text{fixed.}\\
+
+
+&\text{when minimize J respect to } \mu_k. \text{ Take derivative with respect to }\mu_k \\
+&\frac{dJ}{d\mu_k} = 2\sum_{n=1}^N r_{nk}(x_n -\mu_k) = 0\\
+& \sum_{n=1}^N r_{nk}(x_n -\mu_k) = 0\\
+&\sum_{n=1}^N r_{nk}x_n =\sum_{n=1}^N r_{nk} \mu_k\\
+& \mu_k =\frac{\sum_{n=1}^N r_{nk}x_n }{\sum_{n=1}^N r_{nk}}
+
+ \end{align}
