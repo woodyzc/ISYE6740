@@ -5,25 +5,40 @@ date: "August 21, 2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-& \text{a}
+(A)
+
 \begin{align}
 & \text{Since the distortion function:}\\
 &J= \sum_{n=1}^N \sum_{k=1}^K r_{nk} || x_n - \mu_k||^2\\
 & \text{ and the dissimilarity function: }\\
 & || x_n - \mu_k||^2\\
 
-& \text{if we want to find the values for} \{r_{nk}\} \text{and} \{{\mu_k}\} \text{to minimize J. We can perform a iteration of two steps: first,minimize J with}\\
-& \text{respect to the} \{r_{nk}\}, \text{keeping the} \{{\mu_k}\} \text{fixed. Second
-,minimize J with respect to the} \{{\mu_k}\}, \text{keeping} \{r_{nk}\} \text{fixed.}\\
+& \text{if we want to find the values for } \{r_{nk}\} \text{ and } \{{\mu_k}\} \text{ to minimize J. We can perform a iteration of two steps: first,minimize J with}\\
+& \text{respect to the } \{r_{nk}\}, \text{ keeping the } \{{\mu_k}\} \text{ fixed. Second
+,minimize J with respect to the } \{{\mu_k}\}, \text{ keeping } \{r_{nk}\} \text{ fixed.}\\
 
 
 &\text{when minimize J respect to } \mu_k. \text{ Take derivative with respect to }\mu_k \\
 &\frac{dJ}{d\mu_k} = 2\sum_{n=1}^N r_{nk}(x_n -\mu_k) = 0\\
 & \sum_{n=1}^N r_{nk}(x_n -\mu_k) = 0\\
 &\sum_{n=1}^N r_{nk}x_n =\sum_{n=1}^N r_{nk} \mu_k\\
-& \mu_k =\frac{\sum_{n=1}^N r_{nk}x_n }{\sum_{n=1}^N r_{nk}}
-
+& \mu_k =\frac{\sum_{n=1}^N r_{nk}x_n }{\sum_{n=1}^N r_{nk}}\\
+& \text {Since } \mu_k \text{ is the mean of all of the data points } x_n \text{ assigned to cluster k, it also means that } \mu_k \text{ is the center of k-th cluster.}
  \end{align}
+
+ (B)
+ 
+####The steps of calculating the cluster means and reassign data points to clusters are repeated until no further change in the clusters or maximal number of iteration is exceeded.Since each iteration reduces the value of the distortion function, convergence is guaranteed. Since we are fixing some of the variables such as $r_{nk}$ and $\mu_k$ in each step, this is a local search procedure which does not guarantee optimality.####
+ 
+ 
+(C)
+
+####The average linkage would most likely result in clusters most similar to those given by K-means.####
+
+
+(D)
+
+####The average linkage would successfully separate the two moons####
+
+
+ 
