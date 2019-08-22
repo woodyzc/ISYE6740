@@ -33,12 +33,12 @@ output: html_document
  
 (C)
 
-####The average linkage would most likely result in clusters most similar to those given by K-means.####
+####Since the K-mean clustering caluculates the center of cluster by averaging all the data points in the same cluster. The average linkage would most likely result in clusters most similar to those given by K-means.####
 
 
 (D)
 
-####The average linkage would successfully separate the two moons####
+####The single linkage would successfully separate the two moons. Because for bottom-up hierarchical clustering, we start by assgin each data points to their own cluster, then two closest clusters are merged till we have just one cluster at the top. As we can see from the figure, the distance between any pairs of neighbouring points in the same moon is shorter than the distance between the closest pairs of points from the two moons. Thus by using the single linkage metrics, all the data points in the same moon will be clustered together first before any point from the other moon can be included in the same cluster.####
 
 
  
