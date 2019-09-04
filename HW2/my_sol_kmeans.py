@@ -24,7 +24,7 @@
 #% For submission, you need to code your own implementation without using
 #% the kmeans matlab function directly. That is, you need to comment it out.
 
-from sklearn.cluster import KMeans
+from scipy.spatial import distance
 import numpy as np
 
 def my_kmeans(image_data, K):
@@ -42,13 +42,15 @@ def my_kmeans(image_data, K):
             centers[i] = new_center
         return centers
     
-    def dist_cal(image_cluster, centers): # calculate the distance between each data point to each center
-                                          # then find the closest center, and store that info in the last column
-        for i in range(image_cluster.shape[0]):
-            dist = np.linalg.norm(image_data[i]-centers,axis=1) #calculate the distance between centroids and each point
-            image_cluster[i] = dist.argmin() # choose the cloest one
+    def dist_cal (image_cluster, centers): # calculate the distance between each data point to each center
+                                          # then find the closest center, and store that info
+            
+        dist = distance.cdist(image_data,centers,'euclidean') #calculate the euclidean distance between each data point and each clsuter center
         
-        centers = update_centers(image_cluster)
+        for i in range(len(image_cluster)): #find the closest center, and store that info
+            image_cluster[i] = dist[i].argmin()
+        
+        centers = update_centers(image_cluster) # update centroids coordiantes
         return image_cluster, centers
     
     n =0
@@ -62,7 +64,8 @@ def my_kmeans(image_data, K):
         if v.all() == False: # if not the same, then continue
             centers = centers_new
         else: # if the same, stop
-            n = 301
             centers = centers_new
+            break
         n += 1
+    print ("Total iteration for k-means:", n)
     return image_cluster, centers

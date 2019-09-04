@@ -26,10 +26,53 @@
 #% For submission, you need to code your own implementation without using
 #% the kmeans matlab function directly. That is, you need to comment it out.
 
-from sklearn.cluster import KMeans
+from scipy.spatial import distance
+import numpy as np
+
 
 def my_kmedoids(image_data, K):
-    kmeans = KMeans(n_clusters=K).fit(image_data)
-    label = kmeans.labels_
-    centroid = kmeans.cluster_centers_
-    return label, centroid
+    
+    # randomly choose K data points as initial centroids
+    centers = image_data[np.random.randint(low = 0, high =image_data.shape[0], size=K),:]
+    
+
+    # create a empty array to store cluster info
+    image_cluster = np.zeros(image_data.shape[0]).astype(int)
+
+    def update_centers(image_data, centers, image_cluster): #update the coordinates of the new centroids
+        for i in range(K):
+            new_center = np.mean(image_data[image_cluster==i],axis=0)# get the mean coordinates for each cluster (cluster center)
+            centers[i] = new_center #store those mean coordinates for each cluster (cluster center)
+            
+        dist = distance.cdist(image_data, centers, 'cityblock') # calculate the Manhattan distance between each data point and each clsuter center
+        for i in range(K):
+            index = dist[:,i].argmin() # find the index for the closest data point to the cluster center
+            centers[i] = image_data[index] # use the coordinates of the closest point as the medoids
+        return centers
+    
+    def dist_cal(image_cluster, centers): # calculate the distance between each data point to each medoid
+                                          # then find the closest medoid, and store that info.
+        
+        dist = distance.cdist(image_data,centers,'cityblock') #calculate the Manhattan distance
+        for i in range(len(image_cluster)): #find the closest medoid, and store that info
+            image_cluster[i] = dist[i].argmin()
+        
+        centers = update_centers(image_data,centers, image_cluster)
+        return image_cluster, centers
+    
+    n =0
+    
+    while n<=300: # 300 iteration max
+        centers_old = centers.copy() # hold the cluster info before update
+        
+        image_cluster, centers_new = dist_cal(image_cluster, centers)
+
+        v = centers_new == centers_old # compare the updated and unupdated centroid coordinates
+        if v.all() == False: # if not the same, then continue
+            centers = centers_new
+        else: # if the same, stop
+             centers = centers_new
+             break
+        n += 1
+    print ("Total iteration for k-mediods:", n)
+    return image_cluster, centers
