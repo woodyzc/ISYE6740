@@ -57,4 +57,4 @@ def score(image_name, K):
     plt.show()
     return None
     
-score('image.jpeg',16)
+score('image.bmp',16)
