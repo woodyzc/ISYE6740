@@ -28,13 +28,14 @@ from sklearn.cluster import KMeans
 from scipy.spatial import distance
 import warnings
 import numpy as np
+import copy
 
 def my_kmeans(image_data, K):
     
     # randomly choose K data points as initial centroids
     centers = image_data[np.random.randint(low = 0, high =image_data.shape[0], size=K),:].astype(float)
     
-
+    original_K = copy.deepcopy(K)
     # create a empty array to store cluster info
     image_cluster = np.zeros(image_data.shape[0]).astype(int)
     warnings.filterwarnings("ignore")
@@ -80,4 +81,6 @@ def my_kmeans(image_data, K):
         n += 1
     
     print ("Total iteration for k-means:", n)
+    if K !=original_K:
+        print ("Initially, k=", original_K, "However the number of k is too high, causing empty cluster. Thus the programme deletes the empty cluster,\n so now k=",K)
     return image_cluster, centers
