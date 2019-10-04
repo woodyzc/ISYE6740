@@ -39,6 +39,7 @@ def score(image_name, K):
     converted_image1 /= 255
     converted_image2 /= 255
     
+    print (converted_image1.shape)
     plt.subplot(1,3,1)
     plt.title('Origin')
     plt.imshow(image)
