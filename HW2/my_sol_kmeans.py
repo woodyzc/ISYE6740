@@ -83,4 +83,8 @@ def my_kmeans(image_data, K):
     print ("Total iteration for k-means:", n)
     if K !=original_K:
         print ("Initially, k=", original_K, "However the number of k is too high, causing empty cluster. Thus the programme deletes the empty cluster,\n so now k=",K)
+<<<<<<< HEAD
     return image_cluster, centers
+=======
+    return image_cluster, centers
+>>>>>>> eab03b91dd610e1a912a572aec15b3742269bf99
